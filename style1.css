@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+    display: block;
+}
+
+body {
+    margin: 100px;
+}
+
+
+
+
+.field {
+    width: 400px;
+    /* height: 800px; */
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #cccccc;
+}
+
+.exel {
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    border-right: 2px solid #eee;
+    border-bottom: 2px solid #eee;
+}
+.exel:hover {
+    cursor:pointer;
+}
+
+.red {
+    background-color: red;
+}
+.green {
+    background-color: green;
+}
+.blue {
+    background-color: blue;
+}
+.yellow {
+    background-color: yellow;
+}
+/* .active {
+    background-color: whitesmoke;
+    border-radius: 50%;
+    
+} */
+.hide {
+    display: none;
+}

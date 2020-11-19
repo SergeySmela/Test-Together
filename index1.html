@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task4-Sergey</title>
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Page Title</h1>
+
+    <div class="header">  
+
+        <button type="button" class="btn btn-success" id="startStop">Start</button>
+        <button type="button" class="btn btn-outline-info" id="reset">New Game</button>
+
+        <form>
+            <div class="form-row">
+            <div class="form-group col-md-1">
+                <label for="points">Points</label>
+                <input type="text" class="form-control" id="points" placeholder="74" disabled>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="time">Time Left</label>
+                <input type="text" class="form-control" id="time" placeholder="01:00" readonly>
+            </div>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="result">
+        <table>
+            <thead>
+                <tr>
+                    <td>Winer Name</td>
+                    <td>Points</td>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- <textarea name="" id="countdown" cols="3" rows="3"></textarea> -->
+    <!-- <canvas id="canvas" width="300" height="300"></canvas> -->
+    <script src="main.js"></script>
+</body>
+</html>
