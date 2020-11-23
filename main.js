@@ -1,11 +1,12 @@
 
 let field = document.createElement('div');
-document.body.appendChild(field);
+document.getElementById('playField').appendChild(field);
 field.classList.add('field');
 
 let arrExel = [];
 let score = 0;
 let points = document.getElementById('points');
+let classes = ['red', 'green', 'blue', 'orange', 'pink', 'yellow'];
 
 
 getRandomIntInclusive = (min, max) => {
@@ -20,6 +21,7 @@ function createNewExel(quantity) {
         let exel = document.createElement('div');
         field.appendChild(exel);
         exel.classList.add('exel');
+        exel.classList.add(arrayRandElement(classes));
         exel.style.backgroundColor = `rgb(${getRandomIntInclusive(0, 255)}, ${getRandomIntInclusive(0, 255)}, ${getRandomIntInclusive(0, 255)})`;
         arrExel.push(exel);
 
@@ -37,36 +39,38 @@ function createNewExel(quantity) {
 createNewExel(getRandomIntInclusive(1, 17));
 
 
-let a8=['red', 'green', 'blue', 'orange', 'pink', 'yellow'];
+
 
 function arrayRandElement(arr) {
     var rand = Math.floor(Math.random() * arr.length);
     return arr[rand];
 }
 
-console.log('[arrayRandElement(a8)]', arrayRandElement(a8));
+console.log('[arrayRandElement(a8)]', arrayRandElement(classes));
 
 
 
 function clickExel(e) {
-    score++;
+    
     let elem = e.target;
 
     if (elem.classList.contains('field')) return false
+    else if (elem.classList.contains('pink')) score = score * 2;
+    else if (elem.classList.contains('orange')) score = score - 2;
+    else score++;
 
     elem.classList.add('hide');
     points.value = score;
 
     createNewExel(getRandomIntInclusive(0, 3));
-    console.log('[e.taregt]', e.target);
-    console.log('[arrExel]', arrExel);
-    console.log('[arrExel.length]', arrExel.length);
+    console.log('[arrayRandElement(a8)]', arrayRandElement(classes));
+    
 }
 
 
 // Timer
 
-let startingMinutes = 0.1;
+let startingMinutes = 0.2;  // Устанавливаем время игры
 let time = startingMinutes * 60;
 
 const countdownEl = document.getElementById('time');
@@ -75,7 +79,7 @@ function updateCountdown() {
     if (time < 0) {
         btnStartStop.removeEventListener('click', startStop);
         resetTimer();
-        alert('Time is Out');
+        // alert('Time is Out');
         writeToLocalStorage();
         return
     }
@@ -88,8 +92,7 @@ function updateCountdown() {
     countdownEl.value = `${minutes}:${seconds}`;
     time--;
 
-    console.log('[time]', time);
-    console.log('[startingMinutes]', startingMinutes);
+    
    
 }
 
@@ -145,39 +148,52 @@ function resetTimer() {
 
 let winers = [];
 
-function writeToLocalStorage() {
-    
-    let winerName = prompt('Enter Your Name');
-    let winer = {};
-    winer[winerName] = points.value;
-    winers.push(winer);
+function saveUser() {
 
-    localStorage.setItem('winers', JSON.stringify(winers));
+    let winerName = document.getElementById('inputText3').value;   
+     // prompt('Enter Your Name');
+     let winer = {};
+     winer[winerName] = points.value;
+     winers.push(winer);
+ 
+     localStorage.setItem('winers', JSON.stringify(winers));
 
-
-    
+    updateResults();
+  
 }
 
-let result = document.querySelector('.tbody');
+function writeToLocalStorage() {
+    
+    $('#staticBackdrop').modal('show');
 
-let b = JSON.parse(localStorage.getItem('winers')) ;
+    document.getElementById('score').textContent = points.value;
+    
+    document.getElementById('saveUserName').addEventListener('click', saveUser);
+}
+
+function updateResults() {
+    let result = document.querySelector('.tbody');
+
+    let b = JSON.parse(localStorage.getItem('winers')) ;
 
 
-let a = b.map((elem) => {
+    let a = b.map((elem) => {
     for (const key in elem) {
         if (elem.hasOwnProperty(key)) {
             const element = elem[key];
-            return `<tr><th>${key}</th><td>${element}</td></tr>`
+            return `<tr><td>${key}</td><td>${element}</td></tr>`
         }
     }
     
-});
+    });
 
-console.log('[a]', a);
+    console.log('[a]', a);
 
-result.innerHTML = a;
+    result.innerHTML = a;
+}
 
-console.log('[typeof (1 + )]', typeof (1 + '2'));
+updateResults();
+
 
 
 
